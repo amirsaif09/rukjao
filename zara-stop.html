@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Just One Feeling</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --primary: #ff5f9e;
+  --secondary: #ffb6c1;
+  --dark: #1a0010;
+  --light: #ffe4ec;
+  --accent: #ffd1e6;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: radial-gradient(circle at top, var(--secondary), var(--primary), var(--dark));
+  color: #fff;
+  overflow-x: hidden;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Animated gradient background */
+.background-animation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  opacity: 0.6;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(255, 182, 193, 0.4) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 95, 158, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(255, 209, 230, 0.2) 0%, transparent 50%);
+  animation: gradientShift 15s ease-in-out infinite alternate;
+}
+
+@keyframes gradientShift {
+  0% { transform: scale(1) rotate(0deg); }
+  100% { transform: scale(1.1) rotate(3deg); }
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 90px 22px;
+  position: relative;
+  z-index: 1;
+}
+
+section {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border-radius: 28px;
+  padding: 50px 40px;
+  margin-bottom: 70px;
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transform: perspective(1000px) rotateX(4deg) translateY(30px);
+  opacity: 0;
+  animation: fadeUp 1.2s ease forwards;
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+section:hover {
+  transform: perspective(1000px) rotateX(0deg) translateY(-10px);
+  box-shadow: 
+    0 30px 80px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+section:hover::before {
+  opacity: 1;
+}
+
+section:nth-child(1) { animation-delay: .2s; }
+section:nth-child(2) { animation-delay: .4s; }
+section:nth-child(3) { animation-delay: .6s; }
+section:nth-child(4) { animation-delay: .8s; }
+section:nth-child(5) { animation-delay: 1s; }
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: perspective(1000px) rotateX(0deg) translateY(0);
+  }
+}
+
+h1 {
+  text-align: center;
+  font-weight: 500;
+  font-size: 42px;
+  color: var(--light);
+  margin-bottom: 20px;
+  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  font-family: 'Dancing Script', cursive;
+  letter-spacing: 1px;
+}
+
+h2 {
+  font-weight: 500;
+  color: var(--accent);
+  margin-bottom: 25px;
+  font-size: 28px;
+  position: relative;
+  display: inline-block;
+}
+
+h2::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary), transparent);
+  border-radius: 2px;
+}
+
+p {
+  font-size: 18px;
+  line-height: 2;
+  color: rgba(255, 255, 255, 0.95);
+  margin-bottom: 15px;
+}
+
+.center {
+  text-align: center;
+}
+
+.heart-container {
+  display: inline-block;
+  margin-bottom: 25px;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+.heart {
+  font-size: 48px;
+  animation: heartbeat 1.8s infinite;
+  text-shadow: 0 0 20px rgba(255, 95, 158, 0.7);
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  25% { transform: scale(1.1); }
+  50% { transform: scale(1); }
+  75% { transform: scale(1.15); }
+}
+
+/* Floating hearts */
+.floating-heart {
+  position: fixed;
+  bottom: -20px;
+  font-size: 22px;
+  animation: floatUp linear infinite;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 0;
+  filter: drop-shadow(0 0 8px rgba(255, 95, 158, 0.6));
+  transition: opacity 0.3s ease;
+}
+
+@keyframes floatUp {
+  to {
+    transform: translateY(-120vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Decorative elements */
+.sparkle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background-color: var(--light);
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 0;
+}
+
+/* Music toggle button */
+.music-toggle {
+  position: fixed;
+  top: 25px;
+  right: 25px;
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 100;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.music-toggle:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.1);
+}
+
+.music-toggle i {
+  font-size: 22px;
+  color: var(--light);
+}
+
+/* Progress bar */
+.progress-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  z-index: 100;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--secondary), var(--primary));
+  width: 0%;
+  transition: width 0.3s ease;
+}
+
+/* Typing effect */
+.typed-text {
+  display: inline-block;
+  border-right: 3px solid var(--light);
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { border-color: transparent; }
+  50% { border-color: var(--light); }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .container {
+    padding: 70px 15px;
+  }
+  
+  section {
+    padding: 35px 25px;
+    margin-bottom: 50px;
+  }
+  
+  h1 {
+    font-size: 34px;
+  }
+  
+  h2 {
+    font-size: 24px;
+  }
+  
+  p {
+    font-size: 16px;
+    line-height: 1.8;
+  }
+  
+  .heart {
+    font-size: 40px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="background-animation"></div>
+
+<div class="progress-container">
+  <div class="progress-bar" id="progressBar"></div>
+</div>
+
+<div class="music-toggle" id="musicToggle">
+  <i class="fas fa-music"></i>
+</div>
+
+<div class="container">
+
+<section class="center">
+  <div class="heart-container">
+    <div class="heart">❤️</div>
+  </div>
+  <h1><span class="typed-text" id="typedText"></span></h1>
+  <p>
+    Kitna Kuch h jb insan saath hota h to kehna bhool jata h<br>
+    Goodbye Note For You Zara,Still Mt jao mujhe chodkr
+  </p>
+</section>
+
+<section>
+  <h2>Jo dil se tha</h2>
+  <p>
+    Zara i LOved you so much in every way tum mere liye koi timepass nhi thi tum mere liye wo ho jo merre paas tha maine sb tumhare liye krdia  And I really LOve You so much i cant live without you yrr
+    i know im worst for you please mt jao yrr mai tumhare saath aage ki zindagi dekhna chahta hu mai sbko mna lunga mera saath mt chodo yrr please i know im still crying while writhing this maine hamesha gltia kri Zara hamesha but mai un gltio se seekha bhi mt jao na yrr mai akela nhi jii paunga tumhare bagair 
+    Zara tum bhi successfull ho jaeogi mai bhi or please i will definetly convinced you father mother brother but mere liye bhot heavy burden h ye and i know kahi na kahi tumhare dil me mere liye h but tum bhot saare consequences se drti ho jo sirf tumhe ptta h mujhe nhi mai kbhi tumari pdhai ke beech nhi aaunga mai tumhare saath e stranger bn kr nhi rehna chahta.
+  </p>
+</section>
+
+<section>
+  <h2>I Still Remember</h2>
+  <p>
+    i still remember every thing hamari baat hamari chat hamre snap hamara ldhna hamari masti hamari fight sab kuch yaad h mujhe Zara we fought a lot but i never left you alone mai hamesha tumhare saath tha or rahunga bhi i was with you in you every hard time i know tumhe ab kuch bhi nhi dikhega mera but mai hamesha tumhare saath tha or rahunga bhi mt jao na yrr please mai tumhare bina nhi jii paunga mujhe kuch waqt ki mauhalat do Mai sch me bhot pyaar krta hu tumhe Zara
+    Zara mai tumhe hamesha khush dekhna chahta hu  tum kamiyab ho jao tumhe mujhse  behtar shqs mile yrr but in present i dont  want to lose you i was with you when you loved me but meri feelibgs fade thi but now tumhari feeling fade hogyi h mbut meri h ab bho is moment pr mt jao we can take a gap yrr mai tumhe tang nhi krunga itna sa bhi but ese stranger to mt bnao na yrr For God Sake please 
+  </p>
+</section>
+
+<section>
+  <h2>Meri boundary</h2>
+  <p>
+    Ye sb kehna ek burden ki tarah feel horha h mujhko jaisi kisine mere dil pr paththar rakh dia ho or if you find me kuch nhi yr<br>
+    is you find any difficuty in life to talk to me mai hamesha tumhare saath hoon hamesha tumhare paas hi hu  Zara but i want ki mt jo chodkr gap lelo chahe please na yrr or ham year bhi waste nhi krenge na tumhara na mera<br><br>
+    Main tumhe force nahi karunga.<br>
+    Main tumhe guilty feel nhi karaunga.<br>
+    Aur na hi apni ya tumhari respect todunga.<br><br>
+    Mai hamesa tumko yaad krunga Zara 
+
+    Agar dil ke kisi kone mein bhi lage ki ek honest try banta hai —<br>
+    main yahin hoon.<br><br>
+
+    Agar nahi —<br>
+    main us decision ko bhi izzat deta hoon.
+    Do you remember ham dono ne kaha tha ki hamare purane relation me am dono ne apne purane partners pr efforts diye the but un logo ka rakhna hi nhi tha isliye aage nhi bdhe but Zara ham dono to ese nhi h na agr ham dono himmat na haare to ham dobo us mukaam tk pohoch jaenge Zara please Maan jao it is working and it will work yrr 
+  </p>
+</section>
+
+<section class="center">
+  <h2>Jo bhi tum choose karo</h2>
+  <p>
+    Main bas tumhari khushi chahta hoon.<br>
+    Mere saath ho ya bina mere.<br><br>
+    I prefer ki tum mujhe chuno Zara bs mai or meri zindagi  me tum or koi nhi  "Ruk Jao" "Mt Jao" 
+    Agar baat karni ho,<br>
+    tum jaanti ho ❤️
+  </p>
+  <div class="heart-container" style="margin-top: 30px;">
+    <div class="heart">💖</div>
+  </div>
+</section>
+
+</div>
+
+<audio id="bgMusic" loop>
+  <source src="https://assets.mixkit.co/music/preview/mixkit-little-birds-singing-in-the-trees-34.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+// Typing effect for title
+const text = "Abhi Na Jao Chodkr...";
+let i = 0;
+const speed = 100;
+
+function typeWriter() {
+  if (i < text.length) {
+    document.getElementById("typedText").innerHTML += text.charAt(i);
+    i++;
+    setTimeout(typeWriter, speed);
+  }
+}
+
+// Start typing effect when page loads
+window.addEventListener('load', () => {
+  setTimeout(typeWriter, 500);
+});
+
+// Floating hearts
+const hearts = ["❤️", "💖", "💗", "💕", "💘", "💓", "💞"];
+const heartColors = ["#ff5f9e", "#ffb6c1", "#ffd1e6", "#ffe4ec", "#ff80ab"];
+
+setInterval(() => {
+  const h = document.createElement("div");
+  h.className = "floating-heart";
+  h.innerText = hearts[Math.floor(Math.random() * hearts.length)];
+  h.style.left = Math.random() * 100 + "vw";
+  h.style.animationDuration = 4 + Math.random() * 5 + "s";
+  h.style.color = heartColors[Math.floor(Math.random() * heartColors.length)];
+  h.style.fontSize = (18 + Math.random() * 15) + "px";
+  h.style.opacity = "0.8";
+  document.body.appendChild(h);
+  
+  setTimeout(() => {
+    h.style.opacity = "0";
+    setTimeout(() => h.remove(), 500);
+  }, 7000);
+}, 300);
+
+// Progress bar on scroll
+window.addEventListener('scroll', () => {
+  const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const scrolled = (winScroll / height) * 100;
+  document.getElementById("progressBar").style.width = scrolled + "%";
+});
+
+// Music toggle
+const musicToggle = document.getElementById('musicToggle');
+const bgMusic = document.getElementById('bgMusic');
+let musicPlaying = false;
+
+// Try to play music on user interaction
+document.body.addEventListener('click', () => {
+  if (!musicPlaying) {
+    bgMusic.volume = 0.4;
+    bgMusic.play().then(() => {
+      musicPlaying = true;
+      musicToggle.innerHTML = '<i class="fas fa-volume-up"></i>';
+    }).catch(e => {
+      console.log("Audio play failed:", e);
+    });
+  }
+});
+
+musicToggle.addEventListener('click', (e) => {
+  e.stopPropagation();
+  if (musicPlaying) {
+    bgMusic.pause();
+    musicToggle.innerHTML = '<i class="fas fa-volume-mute"></i>';
+  } else {
+    bgMusic.play();
+    musicToggle.innerHTML = '<i class="fas fa-volume-up"></i>';
+  }
+  musicPlaying = !musicPlaying;
+});
+
+// Sparkle effect on click
+document.addEventListener('click', (e) => {
+  for (let i = 0; i < 5; i++) {
+    createSparkle(e.clientX, e.clientY);
+  }
+});
+
+function createSparkle(x, y) {
+  const sparkle = document.createElement('div');
+  sparkle.className = 'sparkle';
+  sparkle.style.left = x + 'px';
+  sparkle.style.top = y + 'px';
+  
+  // Randomize sparkle properties
+  const size = 3 + Math.random() * 6;
+  sparkle.style.width = size + 'px';
+  sparkle.style.height = size + 'px';
+  sparkle.style.backgroundColor = heartColors[Math.floor(Math.random() * heartColors.length)];
+  
+  document.body.appendChild(sparkle);
+  
+  // Animate sparkle
+  const angle = Math.random() * Math.PI * 2;
+  const distance = 30 + Math.random() * 50;
+  const duration = 500 + Math.random() * 1000;
+  
+  sparkle.animate([
+    { 
+      transform: `translate(0, 0) rotate(0deg)`,
+      opacity: 1 
+    },
+    { 
+      transform: `translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px) rotate(180deg)`,
+      opacity: 0 
+    }
+  ], {
+    duration: duration,
+    easing: 'cubic-bezier(0.215, 0.610, 0.355, 1)'
+  });
+  
+  setTimeout(() => sparkle.remove(), duration);
+}
+
+// Parallax effect on scroll
+window.addEventListener('scroll', () => {
+  const scrolled = window.pageYOffset;
+  const sections = document.querySelectorAll('section');
+  
+  sections.forEach((section, index) => {
+    const rate = scrolled * 0.05;
+    section.style.transform = `perspective(1000px) rotateX(0deg) translateY(${rate * (index % 2 === 0 ? 1 : -1)}px)`;
+  });
+});
+
+// Smooth scroll to sections on click (if you want to add navigation later)
+document.querySelectorAll('section').forEach(section => {
+  section.addEventListener('click', () => {
+    section.style.transform = 'perspective(1000px) rotateX(0deg) scale(0.98)';
+    setTimeout(() => {
+      section.style.transform = 'perspective(1000px) rotateX(0deg) scale(1)';
+    }, 150);
+  });
+});
+</script>
+
+</body>
+</html>
